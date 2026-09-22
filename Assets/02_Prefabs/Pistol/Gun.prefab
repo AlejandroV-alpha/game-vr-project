@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3575946206191731175}
   - component: {fileID: 2461059178625266305}
+  - component: {fileID: 5297750858079100659}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -78,7 +79,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gun
   firePoint: {fileID: 1455085063774621243}
+  shootAction: {fileID: 0}
   range: 100
+  magazineSize: 6
+  currentAmmo: 0
+--- !u!114 &5297750858079100659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4034897882022276762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 188df02d07314d0439b71a890dc19b70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GunReload
+  reloadSpeed: 15
+  maxAngleFromDown: 40
+  reloadCooldown: 0.5
 --- !u!1001 &8197132793275447664
 PrefabInstance:
   m_ObjectHideFlags: 0

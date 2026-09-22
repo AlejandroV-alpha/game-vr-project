@@ -5,28 +5,35 @@ using UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics;
 
 public class Gun : MonoBehaviour
 {
-    public Transform firePoint;
-    public LineRenderer bulletTracer;
-    public ParticleSystem muzzleFlash;
-    public GameObject impactEffectPrefab;
-    public InputActionReference shootAction;
+    [Header("Referencias")]
+    [SerializeField] Transform firePoint;
+    [SerializeField] LineRenderer bulletTracer;
+    [SerializeField] ParticleSystem muzzleFlash;
+    [SerializeField] GameObject impactEffectPrefab;
+    [SerializeField] InputActionReference shootAction;
 
-    public AudioClip gunShotSound;
-    public AudioClip gunReloadSound;
+    [Header("Audio")]
+    [SerializeField] AudioClip gunShotSound;
+    [SerializeField] AudioClip gunReloadSound;
 
-    public float range = 100f;
-    public float tracerDuration = 0.05f;
-    public float impactEffectDuration = 1f;
+    [Header("Disparo")]
+    [SerializeField] float range = 100f;
+    [SerializeField] float tracerDuration = 0.05f;
+    [SerializeField] float impactEffectDuration = 1f;
 
-    public float shootHapticAmplitude = 0.5f;
-    public float shootHapticDuration = 0.08f;
+    [Header("Municion")]
+    [SerializeField] int magazineSize = 6;
+    [SerializeField] int currentAmmo;
 
-    public float recoilDistance = 0.03f;
-    public float recoilKickDuration = 0.03f;
-    public float recoilReturnDuration = 0.06f;
+    [Header("Vibracion")]
+    [Range(0f, 1f)]
+    [SerializeField] float shootHapticAmplitude = 0.5f;
+    [SerializeField] float shootHapticDuration = 0.08f;
 
-    public int magazineSize = 6;
-    public int currentAmmo;
+    [Header("Retroceso")]
+    [SerializeField] float recoilDistance = 0.03f;
+    [SerializeField] float recoilKickDuration = 0.03f;
+    [SerializeField] float recoilReturnDuration = 0.06f;
 
     Transform pistolModel;
     Vector3 pistolInitialPosition;

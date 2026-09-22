@@ -3,9 +3,13 @@ using UnityEngine;
 [RequireComponent(typeof(Gun))]
 public class GunReload : MonoBehaviour
 {
-    public float reloadSpeed = 15f;
-    public float maxAngleFromDown = 40f;
-    public float reloadCooldown = 0.5f;
+    [Header("Recarga")]
+    [SerializeField] float reloadSpeed = 15f;
+
+    [Range(0f, 90f)]
+    [SerializeField] float maxAngleFromDown = 40f;
+
+    [SerializeField] float reloadCooldown = 0.5f;
 
     Gun gun;
     Vector3 previousPosition;

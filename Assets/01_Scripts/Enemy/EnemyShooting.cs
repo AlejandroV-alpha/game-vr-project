@@ -108,6 +108,10 @@ public class EnemyShooting : MonoBehaviour
 
         float maxDistance = distanceToPlayer + 1.5f;
 
+        float projectileSpeedBonus = DifficultyManager.instance.GetProjectileSpeedBonus();
+
+        float currentProjectileSpeed = enemyData.projectileSpeed + projectileSpeedBonus;
+
         audioSource.PlayOneShot(shootSound);
 
         EnemyProjectile projectile = Instantiate(
@@ -118,7 +122,7 @@ public class EnemyShooting : MonoBehaviour
 
         projectile.Initialize(
             direction,
-            enemyData.projectileSpeed,
+            currentProjectileSpeed,
             firePoint.position,
             maxDistance,
             enemyData.damage

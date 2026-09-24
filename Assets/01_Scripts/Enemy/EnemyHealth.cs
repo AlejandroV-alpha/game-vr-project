@@ -6,14 +6,18 @@ public class EnemyHealth : MonoBehaviour, ITakeDamage
     public EnemyData enemyData;
 
     [Header("Vida")]
+    [SerializeField] int maxHealth;
     [SerializeField] int currentHealth;
 
     /// <summary>
-    /// obtiene la vida inicial desde los datos del enemigo
+    /// calcula la vida inicial del enemigo
     /// </summary>
     void Start()
     {
-        currentHealth = enemyData.baseHealth;
+        int healthBonus = DifficultyManager.instance.GetHealthBonus();
+
+        maxHealth = enemyData.baseHealth + healthBonus;
+        currentHealth = maxHealth;
     }
 
     /// <summary>
@@ -23,7 +27,12 @@ public class EnemyHealth : MonoBehaviour, ITakeDamage
     {
         currentHealth -= damage;
 
-        Debug.Log("vida enemigo: " + currentHealth);
+        if (currentHealth < 0)
+        {
+            currentHealth = 0;
+        }
+
+        Debug.Log("vida enemigo: " + currentHealth + "/" + maxHealth);
 
         if (currentHealth <= 0)
         {

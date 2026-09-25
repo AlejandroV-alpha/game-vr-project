@@ -8,6 +8,7 @@ public class EnemyData : ScriptableObject
     public int damage;
 
     [Header("Disparo")]
+    public float firstShotDelay;
     public float fireCooldown;
     public float projectileSpeed;
     public float attackRange;

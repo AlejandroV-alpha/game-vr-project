@@ -69,13 +69,16 @@ public class EnemyShooting : MonoBehaviour
         if (!playerInRange)
         {
             playerInRange = true;
-            nextShotTime = Time.time + enemyData.fireCooldown;
+
+            nextShotTime = Time.time + enemyData.firstShotDelay;
+
             return;
         }
 
         if (Time.time >= nextShotTime)
         {
             Shoot();
+
             nextShotTime = Time.time + enemyData.fireCooldown;
         }
     }
@@ -98,9 +101,6 @@ public class EnemyShooting : MonoBehaviour
     /// </summary>
     void Shoot()
     {
-        Vector3 direction =
-            (player.position - firePoint.position).normalized;
-
         float distanceToPlayer = Vector3.Distance(
             firePoint.position,
             player.position
@@ -111,6 +111,14 @@ public class EnemyShooting : MonoBehaviour
         float projectileSpeedBonus = DifficultyManager.instance.GetProjectileSpeedBonus();
 
         float currentProjectileSpeed = enemyData.projectileSpeed + projectileSpeedBonus;
+
+        Vector3 enemyVelocity = Vector3.back * GameManager.instance.tileSpeed;
+
+        Vector3 direction =
+            CalculateShootDirection(
+                currentProjectileSpeed,
+                enemyVelocity
+            );
 
         audioSource.PlayOneShot(shootSound);
 
@@ -123,9 +131,116 @@ public class EnemyShooting : MonoBehaviour
         projectile.Initialize(
             direction,
             currentProjectileSpeed,
+            enemyVelocity,
             firePoint.position,
             maxDistance,
             enemyData.damage
         );
+    }
+
+    /// <summary>
+    /// calcula la direccion necesaria para alcanzar al jugador
+    /// </summary>
+    Vector3 CalculateShootDirection(
+        float projectileSpeed,
+        Vector3 enemyVelocity
+    )
+    {
+        // distancia y direccion desde el arma hasta el jugador
+        Vector3 relativePosition =
+            player.position - firePoint.position;
+
+
+        // como el enemigo se esta moviendo,
+        // desde su punto de vista el jugador parece moverse
+        // en la direccion contraria
+        Vector3 targetRelativeVelocity =
+            -enemyVelocity;
+
+
+        // estos tres valores se usan para calcular
+        // cuanto tiempo tardaria la bala en alcanzar al jugador
+        float a =
+            targetRelativeVelocity.sqrMagnitude -
+            projectileSpeed * projectileSpeed;
+
+        float b =
+            2f * Vector3.Dot(
+                relativePosition,
+                targetRelativeVelocity
+            );
+
+        float c =
+            relativePosition.sqrMagnitude;
+
+
+        // revisa si existe un tiempo valido
+        // en el que la bala pueda alcanzar al jugador
+        float discriminant =
+            b * b - 4f * a * c;
+
+        if (discriminant < 0f)
+        {
+            // si no encontramos una solucion,
+            // simplemente dispara directamente hacia el jugador
+            return relativePosition.normalized;
+        }
+
+
+        // obtenemos la raiz que necesitamos
+        // para calcular los posibles tiempos de impacto
+        float squareRoot =
+            Mathf.Sqrt(discriminant);
+
+
+        // pueden existir dos tiempos posibles
+        // en los que la bala podria llegar al jugador
+        float time1 =
+            (-b - squareRoot) / (2f * a);
+
+        float time2 =
+            (-b + squareRoot) / (2f * a);
+
+
+        // inicialmente no tenemos ningun tiempo valido
+        float timeToHit = -1f;
+
+
+        // si el primer tiempo ocurre en el futuro, lo usamos
+        if (time1 > 0f)
+        {
+            timeToHit = time1;
+        }
+
+
+        // si el segundo tiempo tambien sirve,
+        // elegimos el que ocurra primero
+        if (time2 > 0f)
+        {
+            if (timeToHit < 0f || time2 < timeToHit)
+            {
+                timeToHit = time2;
+            }
+        }
+
+
+        // si ninguno de los tiempos sirve,
+        // dispara directamente hacia el jugador
+        if (timeToHit <= 0f)
+        {
+            return relativePosition.normalized;
+        }
+
+
+        // calculamos hacia donde debemos apuntar
+        // teniendo en cuenta cuanto se moveran
+        // el enemigo y el jugador durante ese tiempo
+        Vector3 compensatedPosition =
+            relativePosition +
+            targetRelativeVelocity * timeToHit;
+
+
+        // devolvemos solamente la direccion final
+        return compensatedPosition.normalized;
     }
 }

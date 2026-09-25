@@ -5,10 +5,9 @@ public class EnemyProjectile : MonoBehaviour
     Rigidbody rb;
     LineRenderer lineRenderer;
 
-    Vector3 direction;
+    Vector3 velocity;
     Vector3 startPoint;
 
-    float speed;
     float maxDistance;
     int damage;
     bool initialized;
@@ -30,16 +29,18 @@ public class EnemyProjectile : MonoBehaviour
     public void Initialize(
         Vector3 shootDirection,
         float projectileSpeed,
+        Vector3 enemyVelocity,
         Vector3 shootPoint,
         float projectileMaxDistance,
         int projectileDamage
     )
     {
-        direction = shootDirection.normalized;
+        Vector3 projectileRelativeVelocity = shootDirection.normalized * projectileSpeed;
 
-        transform.rotation = Quaternion.LookRotation(direction);
+        velocity = projectileRelativeVelocity + enemyVelocity;
 
-        speed = projectileSpeed;
+        transform.rotation = Quaternion.LookRotation(velocity.normalized);
+
         startPoint = shootPoint;
         maxDistance = projectileMaxDistance;
         damage = projectileDamage;
@@ -60,7 +61,7 @@ public class EnemyProjectile : MonoBehaviour
             return;
         }
 
-        Vector3 nextPosition = rb.position + direction * speed * Time.fixedDeltaTime;
+        Vector3 nextPosition = rb.position + velocity * Time.fixedDeltaTime;
 
         rb.MovePosition(nextPosition);
 
@@ -107,8 +108,7 @@ public class EnemyProjectile : MonoBehaviour
             return;
         }
 
-        ITakeDamage damageable =
-            other.GetComponentInParent<ITakeDamage>();
+        ITakeDamage damageable = other.GetComponentInParent<ITakeDamage>();
 
         if (damageable != null)
         {

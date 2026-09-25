@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DroneData
   baseHealth: 1
   damage: 1
-  fireCooldown: 2
-  projectileSpeed: 2
-  attackRange: 20
+  firstShotDelay: 0.5
+  fireCooldown: 3
+  projectileSpeed: 5
+  attackRange: 35
   movementSpeed: 1
   horizontalRange: 2
   verticalRange: 0.75

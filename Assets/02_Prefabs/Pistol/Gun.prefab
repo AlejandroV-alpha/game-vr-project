@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1455085063774621243}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 3575946206191731175}
   - component: {fileID: 2461059178625266305}
   - component: {fileID: 5297750858079100659}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,11 +88,17 @@ MonoBehaviour:
   shootAction: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   gunShotSound: {fileID: 8300000, guid: 8c461a39220cb08458182716020793e5, type: 3}
   gunReloadSound: {fileID: 8300000, guid: 238b5fb93dff74844a88f2e1f345ef3a, type: 3}
+  damage: 25
   range: 100
   tracerDuration: 0.05
   impactEffectDuration: 1
   magazineSize: 6
   currentAmmo: 0
+  shootHapticAmplitude: 0.5
+  shootHapticDuration: 0.08
+  recoilDistance: 0.03
+  recoilKickDuration: 0.03
+  recoilReturnDuration: 0.06
 --- !u!114 &5297750858079100659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,7 +124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4226717302992328281}
   - component: {fileID: 4966652943469072210}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: AudioSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,7 +253,7 @@ GameObject:
   m_Component:
   - component: {fileID: 713895870605133047}
   - component: {fileID: 5166967063564886588}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: BulletTracer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -399,7 +405,7 @@ GameObject:
   - component: {fileID: 4071263767379285763}
   - component: {fileID: 2353180970104489390}
   - component: {fileID: 6861180174785674350}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: MuzzleFlash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5293,6 +5299,10 @@ PrefabInstance:
     - target: {fileID: 4025096254893583642, guid: 405dee56becb773489fcf4ca899340ec, type: 3}
       propertyPath: m_Name
       value: Pistol
+      objectReference: {fileID: 0}
+    - target: {fileID: 4025096254893583642, guid: 405dee56becb773489fcf4ca899340ec, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4366190478037596064, guid: 405dee56becb773489fcf4ca899340ec, type: 3}
       propertyPath: m_LocalPosition.x

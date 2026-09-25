@@ -4,9 +4,6 @@ public class DifficultyManager : MonoBehaviour
 {
     public static DifficultyManager instance;
 
-    [Header("Etapas")]
-    [SerializeField] float stageDuration = 30f;
-
     [Header("Vida")]
     [SerializeField] int stagesPerHealthIncrease = 3;
     [SerializeField] int maxHealthBonus = 2;
@@ -17,7 +14,6 @@ public class DifficultyManager : MonoBehaviour
 
     [Header("Estado")]
     [SerializeField] int currentStage = 1;
-    [SerializeField] float elapsedTime;
 
     /// <summary>
     /// guarda la instancia del manager
@@ -28,25 +24,11 @@ public class DifficultyManager : MonoBehaviour
     }
 
     /// <summary>
-    /// controla el tiempo de cada etapa
-    /// </summary>
-    void Update()
-    {
-        elapsedTime += Time.deltaTime;
-
-        if (elapsedTime >= stageDuration)
-        {
-            IncreaseStage();
-        }
-    }
-
-    /// <summary>
     /// aumenta la etapa de dificultad
     /// </summary>
-    void IncreaseStage()
+    public void IncreaseStage()
     {
         currentStage++;
-        elapsedTime = 0f;
 
         Debug.Log("nivel de dificultad: " + currentStage);
     }
@@ -68,10 +50,7 @@ public class DifficultyManager : MonoBehaviour
 
         int healthBonus = completedStages / stagesPerHealthIncrease;
 
-        return Mathf.Min(
-            healthBonus,
-            maxHealthBonus
-        );
+        return Mathf.Min(healthBonus, maxHealthBonus);
     }
 
     /// <summary>
@@ -83,9 +62,6 @@ public class DifficultyManager : MonoBehaviour
 
         float speedBonus = completedStages * projectileSpeedIncreasePerStage;
 
-        return Mathf.Min(
-            speedBonus,
-            maxProjectileSpeedBonus
-        );
+        return Mathf.Min(speedBonus, maxProjectileSpeedBonus);
     }
 }

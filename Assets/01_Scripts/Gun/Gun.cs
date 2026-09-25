@@ -118,6 +118,13 @@ public class Gun : MonoBehaviour
                 damageable.TakeDamage(damage);
             }
 
+            IShootable shootable = hit.collider.GetComponentInParent<IShootable>();
+
+            if (shootable != null)
+            {
+                shootable.OnShot();
+            }
+
             Debug.Log("impacto: " + hit.collider.name);
         }
 

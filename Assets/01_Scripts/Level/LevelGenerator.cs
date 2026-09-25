@@ -4,14 +4,18 @@ public class LevelGenerator : MonoBehaviour
 {
     public static LevelGenerator instance;
 
+    [Header("Zonas")]
     public ZoneData[] zones;
+
+    [Header("Generacion")]
     public GameObject lastTile;
     public int tilesPerZone = 5;
-    public float segmentLength = 20f;
+    public float segmentLength = 40f;
 
     ZoneData currentZone;
     int currentZoneIndex = -1;
     int tilesGeneratedInCurrentZone;
+    bool transitionGenerated;
 
     /// <summary>
     /// guarda la instancia del generador
@@ -26,12 +30,49 @@ public class LevelGenerator : MonoBehaviour
     /// </summary>
     public void GenerateNextTile()
     {
-        if (ShouldChangeZone())
+        if (currentZone == null)
         {
             SelectNextZone();
+            GenerateStartTile();
+            return;
         }
 
+        if (transitionGenerated)
+        {
+            DifficultyManager.instance.IncreaseStage();
+            SelectNextZone();
+            GenerateStartTile();
+            transitionGenerated = false;
+            return;
+        }
+
+        if (tilesGeneratedInCurrentZone < tilesPerZone)
+        {
+            GenerateNormalTile();
+            return;
+        }
+
+        GenerateTransitionTile();
+        transitionGenerated = true;
+    }
+
+    /// <summary>
+    /// genera el tile inicial fijo de la zona
+    /// </summary>
+    void GenerateStartTile()
+    {
+        GameObject newTile = CreateTile(currentZone.StartPrefab);
+
+        lastTile = newTile;
+    }
+
+    /// <summary>
+    /// genera un tile aleatorio de la zona actual
+    /// </summary>
+    void GenerateNormalTile()
+    {
         GameObject prefab = SelectRandomPrefab();
+
         GameObject newTile = CreateTile(prefab);
 
         lastTile = newTile;
@@ -39,11 +80,13 @@ public class LevelGenerator : MonoBehaviour
     }
 
     /// <summary>
-    /// indica si se debe cambiar de zona
+    /// genera el tile final de la zona
     /// </summary>
-    bool ShouldChangeZone()
+    void GenerateTransitionTile()
     {
-        return currentZone == null || tilesGeneratedInCurrentZone >= tilesPerZone;
+        GameObject newTile = CreateTile(currentZone.TransitionPrefab);
+
+        lastTile = newTile;
     }
 
     /// <summary>
@@ -63,6 +106,7 @@ public class LevelGenerator : MonoBehaviour
 
         currentZoneIndex = newZoneIndex;
         currentZone = zones[currentZoneIndex];
+
         tilesGeneratedInCurrentZone = 0;
 
         Debug.Log("nueva zona: " + currentZone.Name);
@@ -84,6 +128,7 @@ public class LevelGenerator : MonoBehaviour
     GameObject CreateTile(GameObject prefab)
     {
         float positionZ = lastTile.transform.position.z + segmentLength;
+
         Vector3 position = new Vector3(0f, -0.1f, positionZ);
 
         return Instantiate(prefab, position, Quaternion.identity);

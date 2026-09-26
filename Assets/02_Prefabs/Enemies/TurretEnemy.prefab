@@ -2356,7 +2356,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   enemyData: {fileID: 11400000, guid: d4433bc4582a4b2459dad1a6a06088c0, type: 2}
+  maxHealth: 0
   currentHealth: 0
+  enemyExplosionPrefab: {fileID: 3342304421757688349, guid: 76728c47f240c0f49ace0f688c21e09a, type: 3}
 --- !u!114 &-1624285733780867709
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,6 +9,9 @@ public class EnemyHealth : MonoBehaviour, ITakeDamage
     [SerializeField] int maxHealth;
     [SerializeField] int currentHealth;
 
+    [Header("Efectos")]
+    [SerializeField] GameObject enemyExplosionPrefab;
+
     /// <summary>
     /// calcula la vida inicial del enemigo
     /// </summary>
@@ -45,6 +48,11 @@ public class EnemyHealth : MonoBehaviour, ITakeDamage
     /// </summary>
     void Die()
     {
+        if (enemyExplosionPrefab != null)
+        {
+            Instantiate(enemyExplosionPrefab, transform.position, Quaternion.identity);
+        }
+
         Destroy(gameObject);
     }
 }

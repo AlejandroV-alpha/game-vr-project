@@ -27,9 +27,10 @@ public class Gun : MonoBehaviour
     [SerializeField] int currentAmmo;
 
     [Header("Vibracion")]
+    [SerializeField] HapticImpulsePlayer hapticImpulsePlayer;
     [Range(0f, 1f)]
     [SerializeField] float shootHapticAmplitude = 0.5f;
-    [SerializeField] float shootHapticDuration = 0.08f;
+    [SerializeField] float shootHapticDuration = 0.1f;
 
     [Header("Retroceso")]
     [SerializeField] float recoilDistance = 0.03f;
@@ -40,7 +41,6 @@ public class Gun : MonoBehaviour
     Vector3 pistolInitialPosition;
 
     AudioSource audioSource;
-    HapticImpulsePlayer hapticImpulsePlayer;
 
     Coroutine tracerCoroutine;
     Coroutine recoilCoroutine;
@@ -51,7 +51,6 @@ public class Gun : MonoBehaviour
     void Awake()
     {
         audioSource = GetComponentInChildren<AudioSource>();
-        hapticImpulsePlayer = GetComponentInParent<HapticImpulsePlayer>();
 
         pistolModel = transform.Find("Pistol");
     }

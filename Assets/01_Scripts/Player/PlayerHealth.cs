@@ -6,12 +6,33 @@ public class PlayerHealth : MonoBehaviour, ITakeDamage
     [SerializeField] int maxHealth = 3;
     [SerializeField] int currentHealth;
 
+    [Header("Audio")]
+    [SerializeField] AudioClip damageSound;
+
+    [Header("Feedback")]
+    [SerializeField] PlayerDamageFeedback damageFeedback;
+
+    [Header("UI")]
+    [SerializeField] PlayerHealthUI healthUI;
+
+    AudioSource audioSource;
+
+    /// <summary>
+    /// obtiene los componentes necesarios
+    /// </summary>
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     /// <summary>
     /// carga la vida inicial del jugador
     /// </summary>
     void Start()
     {
         currentHealth = maxHealth;
+
+        healthUI.UpdateHealth(currentHealth, maxHealth);
     }
 
     /// <summary>
@@ -25,6 +46,11 @@ public class PlayerHealth : MonoBehaviour, ITakeDamage
         {
             currentHealth = 0;
         }
+
+        healthUI.UpdateHealth(currentHealth, maxHealth);
+
+        audioSource.PlayOneShot(damageSound);
+        damageFeedback.PlayFeedback();
 
         Debug.Log("vida jugador: " + currentHealth + "/" + maxHealth);
 

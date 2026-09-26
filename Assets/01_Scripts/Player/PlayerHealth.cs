@@ -12,6 +12,9 @@ public class PlayerHealth : MonoBehaviour, ITakeDamage
     [Header("Feedback")]
     [SerializeField] PlayerDamageFeedback damageFeedback;
 
+    [Header("UI")]
+    [SerializeField] PlayerHealthUI healthUI;
+
     AudioSource audioSource;
 
     /// <summary>
@@ -28,6 +31,8 @@ public class PlayerHealth : MonoBehaviour, ITakeDamage
     void Start()
     {
         currentHealth = maxHealth;
+
+        healthUI.UpdateHealth(currentHealth, maxHealth);
     }
 
     /// <summary>
@@ -41,6 +46,8 @@ public class PlayerHealth : MonoBehaviour, ITakeDamage
         {
             currentHealth = 0;
         }
+
+        healthUI.UpdateHealth(currentHealth, maxHealth);
 
         audioSource.PlayOneShot(damageSound);
         damageFeedback.PlayFeedback();

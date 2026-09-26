@@ -17,12 +17,13 @@ public class Gun : MonoBehaviour
     [SerializeField] AudioClip gunReloadSound;
 
     [Header("Disparo")]
+    [SerializeField] int damage = 1;
     [SerializeField] float range = 100f;
     [SerializeField] float tracerDuration = 0.05f;
     [SerializeField] float impactEffectDuration = 1f;
 
     [Header("Municion")]
-    [SerializeField] int magazineSize = 6;
+    [SerializeField] int magazineSize = 10;
     [SerializeField] int currentAmmo;
 
     [Header("Vibracion")]
@@ -110,6 +111,20 @@ public class Gun : MonoBehaviour
 
             ShowImpactEffect(hit);
 
+            ITakeDamage damageable = hit.collider.GetComponentInParent<ITakeDamage>();
+
+            if (damageable != null)
+            {
+                damageable.TakeDamage(damage);
+            }
+
+            IShootable shootable = hit.collider.GetComponentInParent<IShootable>();
+
+            if (shootable != null)
+            {
+                shootable.OnShot();
+            }
+
             Debug.Log("impacto: " + hit.collider.name);
         }
 
@@ -160,8 +175,7 @@ public class Gun : MonoBehaviour
     {
         Vector3 startPosition = pistolInitialPosition;
 
-        Vector3 recoilPosition =
-            pistolInitialPosition + Vector3.back * recoilDistance;
+        Vector3 recoilPosition = pistolInitialPosition + Vector3.back * recoilDistance;
 
         float elapsedTime = 0f;
 

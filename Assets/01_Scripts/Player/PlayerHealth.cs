@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour, ITakeDamage
 {
     [Header("Vida")]
     [SerializeField] int maxHealth = 3;
     [SerializeField] int currentHealth;
+    private float tiempoInicio;
 
     [Header("Audio")]
     [SerializeField] AudioClip damageSound;
@@ -14,6 +16,9 @@ public class PlayerHealth : MonoBehaviour, ITakeDamage
 
     [Header("UI")]
     [SerializeField] PlayerHealthUI healthUI;
+
+    [Header("Menú")]
+    [SerializeField] GameManagerMenu gameStartManager;
 
     AudioSource audioSource;
 
@@ -33,6 +38,7 @@ public class PlayerHealth : MonoBehaviour, ITakeDamage
         currentHealth = maxHealth;
 
         healthUI.UpdateHealth(currentHealth, maxHealth);
+        tiempoInicio = Time.time;
     }
 
     /// <summary>
@@ -66,5 +72,17 @@ public class PlayerHealth : MonoBehaviour, ITakeDamage
     void Die()
     {
         Debug.Log("jugador sin vida");
+        int tiempoSobrevivido = Mathf.FloorToInt(Time.time - tiempoInicio);
+        RankingManager.Instance.AddScore("Jugador", tiempoSobrevivido);
+        Invoke(nameof(GoToMenu), 1.5f);
+    }
+
+    void GoToMenu()
+    {
+        currentHealth = maxHealth;
+        healthUI.UpdateHealth(currentHealth, maxHealth);
+
+        if (gameStartManager != null)
+            gameStartManager.ShowGameOverMenu();
     }
 }

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: f5abed60-e04c-4c78-aa7c-692bba821e0a
+  m_Name: SciFiPanelTexture
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -16,7 +16,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
-  m_CustomRenderQueue: 1997
+  m_CustomRenderQueue: -1
   stringTagMap:
     RenderType: Opaque
   disabledShaderPasses:
@@ -26,7 +26,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 5ea67ab93a4ab574783c5d6239637c75, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0412590349e78014c9698659bc2fc061, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -50,7 +50,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 5ea67ab93a4ab574783c5d6239637c75, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0412590349e78014c9698659bc2fc061, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -92,7 +92,7 @@ Material:
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 0
-    - _Cutoff: 0.415
+    - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -104,7 +104,7 @@ Material:
     - _Metallic: 0.5
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _QueueOffset: -3
+    - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Smoothness: 1
     - _SmoothnessTextureChannel: 0
@@ -122,7 +122,7 @@ Material:
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &2095925183775742349
+--- !u!114 &2327115350308856537
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

@@ -18,8 +18,8 @@ MonoBehaviour:
   fireCooldown: 3
   projectileSpeed: 5
   attackRange: 35
-  horizontalRotationLimit: 30
-  horizontalRotationSpeed: 20
+  horizontalRotationLimit: 60
+  horizontalRotationSpeed: 30
   minVerticalAngle: -30
   maxVerticalAngle: 30
   verticalRotationSpeed: 60

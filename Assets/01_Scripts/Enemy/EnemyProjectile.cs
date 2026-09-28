@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class EnemyProjectile : MonoBehaviour
 {
+    [Header("Colisiones")]
+    [SerializeField] LayerMask obstacleLayers;
+
     Rigidbody rb;
     LineRenderer lineRenderer;
 
@@ -99,10 +102,18 @@ public class EnemyProjectile : MonoBehaviour
     }
 
     /// <summary>
-    /// detecta cuando el proyectil golpea al jugador
+    /// detecta cuando el proyectil golpea al jugador o un obstaculo
     /// </summary>
     void OnTriggerEnter(Collider other)
     {
+        int otherLayer = 1 << other.gameObject.layer;
+
+        if ((obstacleLayers.value & otherLayer) != 0)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         if (!other.CompareTag("Player"))
         {
             return;

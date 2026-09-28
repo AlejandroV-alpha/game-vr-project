@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 398822606417709560}
   - component: {fileID: 3519543887536604864}
   - component: {fileID: 8572153065326531428}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WallRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 219675613209166033}
   - component: {fileID: 3007910554906251322}
   - component: {fileID: 7905860649728407472}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WallLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 6633845124929393953}
   - component: {fileID: 1988323230406042993}
   - component: {fileID: 6555135191778911322}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WallTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,7 +345,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 545270952088042743}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WallPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -79,10 +79,14 @@ public class PlayerHealth : MonoBehaviour, ITakeDamage
 
     void GoToMenu()
     {
-        currentHealth = maxHealth;
-        healthUI.UpdateHealth(currentHealth, maxHealth);
+        // currentHealth = maxHealth;
+        // healthUI.UpdateHealth(currentHealth, maxHealth);
+        //
+        // if (gameStartManager != null)
+        //     gameStartManager.ShowGameOverMenu();
 
-        if (gameStartManager != null)
-            gameStartManager.ShowGameOverMenu();
+        // NUEVO: la vida se resetea sola porque GameScene se carga de nuevo al iniciar.
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MenuScene");
     }
 }

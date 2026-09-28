@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8306631223205605807}
   - component: {fileID: 8784168163185285419}
   - component: {fileID: 4883499003886130011}
+  - component: {fileID: 2355176984357276796}
   m_Layer: 3
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -114,6 +115,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2355176984357276796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 695062374832952199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4b93d6e91367e44aaa356758368a6eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Hazard
+  damage: 1
 --- !u!1 &1640555279281025229
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,6 +140,7 @@ GameObject:
   - component: {fileID: 6570833153047549694}
   - component: {fileID: 2625541992097454526}
   - component: {fileID: 4711893736108665898}
+  - component: {fileID: 5039959115449447986}
   m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
@@ -228,6 +243,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5039959115449447986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640555279281025229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4b93d6e91367e44aaa356758368a6eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Hazard
+  damage: 1
 --- !u!1 &1907130783444795677
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,6 +268,7 @@ GameObject:
   - component: {fileID: 186090192593891629}
   - component: {fileID: 229414346324298148}
   - component: {fileID: 4627230599761911748}
+  - component: {fileID: 6184709049456172664}
   m_Layer: 3
   m_Name: Cube (5)
   m_TagString: Untagged
@@ -340,6 +369,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6184709049456172664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1907130783444795677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4b93d6e91367e44aaa356758368a6eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Hazard
+  damage: 1
 --- !u!1 &2743727213290722459
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,6 +394,7 @@ GameObject:
   - component: {fileID: 3410046259505772417}
   - component: {fileID: 3939686403018583477}
   - component: {fileID: 6304115075214358190}
+  - component: {fileID: 5770294553740539002}
   m_Layer: 3
   m_Name: Cube (3)
   m_TagString: Untagged
@@ -452,6 +495,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5770294553740539002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2743727213290722459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4b93d6e91367e44aaa356758368a6eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Hazard
+  damage: 1
 --- !u!1 &2766258452406939142
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,6 +580,7 @@ GameObject:
   - component: {fileID: 1419626316899646712}
   - component: {fileID: 5019354507864498198}
   - component: {fileID: 2961578393529454977}
+  - component: {fileID: 6899884654054317665}
   m_Layer: 3
   m_Name: Cube (4)
   m_TagString: Untagged
@@ -626,6 +683,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6899884654054317665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3466181837755579787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4b93d6e91367e44aaa356758368a6eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Hazard
+  damage: 1
 --- !u!1 &6843844778546622951
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,6 +708,7 @@ GameObject:
   - component: {fileID: 2547556307891398030}
   - component: {fileID: 762273576042220926}
   - component: {fileID: 4789513262402399303}
+  - component: {fileID: 7008670065085616291}
   m_Layer: 3
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -738,6 +809,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7008670065085616291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6843844778546622951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4b93d6e91367e44aaa356758368a6eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Hazard
+  damage: 1
 --- !u!1001 &1536894550964470372
 PrefabInstance:
   m_ObjectHideFlags: 0

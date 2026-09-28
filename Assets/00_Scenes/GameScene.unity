@@ -6476,6 +6476,13 @@ MonoBehaviour:
     - {fileID: 1128120228369724752, guid: ecad156880c51f040aaefa8dff43e98a, type: 3}
     - {fileID: 1128120228369724752, guid: 69a90d3edc43e6348be456758be5b247, type: 3}
     TransitionPrefab: {fileID: 7879558023142443325, guid: 8ba02bd64ac44c74e8d9531747c4912f, type: 3}
+  - Name: Zone C
+    StartPrefab: {fileID: 19536976930062324, guid: 7b6f4922ad6c4064499dc16ce773cbfd, type: 3}
+    Prefabs:
+    - {fileID: 1128120228369724752, guid: efa18c4d7ea3c094eaf278c399eece82, type: 3}
+    - {fileID: 1128120228369724752, guid: 78c30cb5843c9be439372d514b927211, type: 3}
+    - {fileID: 1128120228369724752, guid: b14ba3d4e562d434480f377c589f6fcc, type: 3}
+    TransitionPrefab: {fileID: 7879558023142443325, guid: 3e40dac1ae679f3469060254bd3d6c4b, type: 3}
   lastTile: {fileID: 235213628}
   tilesPerZone: 5
   segmentLength: 40

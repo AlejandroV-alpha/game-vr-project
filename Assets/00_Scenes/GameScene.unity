@@ -3842,6 +3842,61 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1006536238}
   m_CullTransparentMesh: 1
+--- !u!1 &1034548520
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1034548522}
+  - component: {fileID: 1034548521}
+  m_Layer: 0
+  m_Name: LevelGenerator (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1034548521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034548520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e11b6bae451a09d48a72ac2c4fe36e5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelGenerator
+  zones:
+  - Name: Zone A
+    StartPrefab: {fileID: 7437485508257650542, guid: 466e74f338023d6428e99de090f8fe19, type: 3}
+    Prefabs:
+    - {fileID: 1128120228369724752, guid: 701bd59adfc45e04ab5e781909595b39, type: 3}
+    - {fileID: 1128120228369724752, guid: 3851aa6bd1d3e1949b9423aa017700a1, type: 3}
+    - {fileID: 1128120228369724752, guid: 75436bfbbcfa2144eb88a15c4c34a836, type: 3}
+    TransitionPrefab: {fileID: 80962212020680635, guid: a6fb14c20fe9631448a0783d3f8f5198, type: 3}
+  lastTile: {fileID: 235213628}
+  tilesPerZone: 5
+  segmentLength: 40
+--- !u!4 &1034548522
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034548520}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1037889584
 GameObject:
   m_ObjectHideFlags: 0
@@ -6449,7 +6504,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1822267160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6470,20 +6525,6 @@ MonoBehaviour:
     - {fileID: 1128120228369724752, guid: 3851aa6bd1d3e1949b9423aa017700a1, type: 3}
     - {fileID: 1128120228369724752, guid: 75436bfbbcfa2144eb88a15c4c34a836, type: 3}
     TransitionPrefab: {fileID: 80962212020680635, guid: a6fb14c20fe9631448a0783d3f8f5198, type: 3}
-  - Name: Zone B
-    StartPrefab: {fileID: 19536976930062324, guid: 4e811bac11ce60842bab400e4eff01c9, type: 3}
-    Prefabs:
-    - {fileID: 1128120228369724752, guid: f04de4f8a27ce084e8b5d3ac025c6e69, type: 3}
-    - {fileID: 1128120228369724752, guid: ecad156880c51f040aaefa8dff43e98a, type: 3}
-    - {fileID: 1128120228369724752, guid: 69a90d3edc43e6348be456758be5b247, type: 3}
-    TransitionPrefab: {fileID: 7879558023142443325, guid: 8ba02bd64ac44c74e8d9531747c4912f, type: 3}
-  - Name: Zone C
-    StartPrefab: {fileID: 19536976930062324, guid: 7b6f4922ad6c4064499dc16ce773cbfd, type: 3}
-    Prefabs:
-    - {fileID: 1128120228369724752, guid: efa18c4d7ea3c094eaf278c399eece82, type: 3}
-    - {fileID: 1128120228369724752, guid: 78c30cb5843c9be439372d514b927211, type: 3}
-    - {fileID: 1128120228369724752, guid: b14ba3d4e562d434480f377c589f6fcc, type: 3}
-    TransitionPrefab: {fileID: 7879558023142443325, guid: 3e40dac1ae679f3469060254bd3d6c4b, type: 3}
   lastTile: {fileID: 235213628}
   tilesPerZone: 5
   segmentLength: 40
@@ -7690,6 +7731,7 @@ SceneRoots:
   - {fileID: 489593711}
   - {fileID: 609582372}
   - {fileID: 1822267161}
+  - {fileID: 1034548522}
   - {fileID: 22237648}
   - {fileID: 144164775}
   - {fileID: 592342315}

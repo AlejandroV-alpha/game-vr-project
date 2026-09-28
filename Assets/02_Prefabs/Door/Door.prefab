@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6989689942789117804}
   - component: {fileID: 1464161427481221464}
   - component: {fileID: 8166355872690977687}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: marcodelapuerta
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 7817063726153645177}
   - component: {fileID: 2749105433174465844}
   - component: {fileID: 6968637754808296649}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LeftDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +216,7 @@ GameObject:
   - component: {fileID: 6155903406341569251}
   - component: {fileID: 530132507840911501}
   - component: {fileID: 3209313872836108454}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -407,7 +407,7 @@ GameObject:
   - component: {fileID: 8088335106791596611}
   - component: {fileID: 636510317402154488}
   - component: {fileID: 7556169778054774594}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DoorButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -529,7 +529,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4466901517316336913}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -561,7 +561,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4329866741109306826}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DoorSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -597,7 +597,7 @@ GameObject:
   - component: {fileID: 3799055619934529640}
   - component: {fileID: 6701896824714050080}
   - component: {fileID: 5642764129335209311}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 'RightDoor '
   m_TagString: Untagged
   m_Icon: {fileID: 0}

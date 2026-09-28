@@ -222,7 +222,7 @@ public class Gun : MonoBehaviour
     void ShowImpactEffect(RaycastHit hit)
     {
         Vector3 position = hit.point + hit.normal * 0.01f;
-        Quaternion rotation = Quaternion.LookRotation(hit.normal);
+        Quaternion rotation = Quaternion.LookRotation(-hit.normal);
 
         GameObject impactEffect = Instantiate(
             impactEffectPrefab,

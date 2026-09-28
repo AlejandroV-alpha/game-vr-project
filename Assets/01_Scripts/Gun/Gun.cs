@@ -26,6 +26,9 @@ public class Gun : MonoBehaviour
     [SerializeField] int magazineSize = 10;
     [SerializeField] int currentAmmo;
 
+    [Header("UI")]
+    [SerializeField] AmmoUI ammoUI;
+
     [Header("Vibracion")]
     [SerializeField] HapticImpulsePlayer hapticImpulsePlayer;
     [Range(0f, 1f)]
@@ -63,6 +66,8 @@ public class Gun : MonoBehaviour
         currentAmmo = magazineSize;
         bulletTracer.enabled = false;
 
+        UpdateAmmoUI();
+
         if (pistolModel != null)
         {
             pistolInitialPosition = pistolModel.localPosition;
@@ -92,6 +97,8 @@ public class Gun : MonoBehaviour
         }
 
         currentAmmo--;
+
+        UpdateAmmoUI();
 
         audioSource.PlayOneShot(gunShotSound);
         muzzleFlash.Play();
@@ -222,7 +229,7 @@ public class Gun : MonoBehaviour
     void ShowImpactEffect(RaycastHit hit)
     {
         Vector3 position = hit.point + hit.normal * 0.01f;
-        Quaternion rotation = Quaternion.LookRotation(hit.normal);
+        Quaternion rotation = Quaternion.LookRotation(-hit.normal);
 
         GameObject impactEffect = Instantiate(
             impactEffectPrefab,
@@ -262,6 +269,19 @@ public class Gun : MonoBehaviour
     }
 
     /// <summary>
+    /// actualiza la interfaz de municion
+    /// </summary>
+    void UpdateAmmoUI()
+    {
+        if (ammoUI == null)
+        {
+            return;
+        }
+
+        ammoUI.UpdateAmmo(currentAmmo, magazineSize);
+    }
+
+    /// <summary>
     /// recarga el cargador
     /// </summary>
     public void Reload()
@@ -272,6 +292,8 @@ public class Gun : MonoBehaviour
         }
 
         currentAmmo = magazineSize;
+
+        UpdateAmmoUI();
 
         audioSource.PlayOneShot(gunReloadSound);
 

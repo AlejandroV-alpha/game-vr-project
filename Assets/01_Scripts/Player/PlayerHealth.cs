@@ -72,9 +72,9 @@ public class PlayerHealth : MonoBehaviour, ITakeDamage
     void Die()
     {
         Debug.Log("jugador sin vida");
-        int tiempoSobrevivido = Mathf.FloorToInt(Time.time - tiempoInicio);
-        RankingManager.Instance.AddScore("Jugador", tiempoSobrevivido);
-        Invoke(nameof(GoToMenu), 1.5f);
+        //int tiempoSobrevivido = Mathf.FloorToInt(Time.time - tiempoInicio);
+        //RankingManager.Instance.AddScore("Jugador", tiempoSobrevivido);
+        //Invoke(nameof(GoToMenu), 1.5f);
     }
 
     void GoToMenu()

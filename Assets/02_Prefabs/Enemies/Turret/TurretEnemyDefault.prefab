@@ -2299,7 +2299,7 @@ GameObject:
   - component: {fileID: 4059852515453110556}
   - component: {fileID: 198448001688972251}
   m_Layer: 0
-  m_Name: TurretEnemy
+  m_Name: TurretEnemyDefault
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2389,6 +2389,9 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: d4433bc4582a4b2459dad1a6a06088c0, type: 2}
   firePoint: {fileID: 5980159918872477781}
   projectilePrefab: {fileID: -6150155140847085521, guid: e925ffb8d83566a42af69bd8ea95c0bd, type: 3}
+  lineOfSightBlockers:
+    serializedVersion: 2
+    m_Bits: 8
   shootSound: {fileID: 8300000, guid: 8c461a39220cb08458182716020793e5, type: 3}
 --- !u!82 &198448001688972251
 AudioSource:

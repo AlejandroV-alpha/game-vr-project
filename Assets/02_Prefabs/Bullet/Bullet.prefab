@@ -138,6 +138,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1404df3d92804e840bbed8debc6d2d59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyProjectile
+  obstacleLayers:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!65 &3375928926223760249
 BoxCollider:
   m_ObjectHideFlags: 0

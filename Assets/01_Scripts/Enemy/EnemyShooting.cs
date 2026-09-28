@@ -9,6 +9,9 @@ public class EnemyShooting : MonoBehaviour
     [SerializeField] Transform firePoint;
     [SerializeField] EnemyProjectile projectilePrefab;
 
+    [Header("Vision")]
+    [SerializeField] LayerMask lineOfSightBlockers;
+
     [Header("Audio")]
     [SerializeField] AudioClip shootSound;
 
@@ -66,6 +69,12 @@ public class EnemyShooting : MonoBehaviour
             return;
         }
 
+        if (!HasLineOfSight())
+        {
+            playerInRange = false;
+            return;
+        }
+
         if (!playerInRange)
         {
             playerInRange = true;
@@ -89,6 +98,28 @@ public class EnemyShooting : MonoBehaviour
     bool IsPlayerInFront()
     {
         if (transform.position.z <= player.position.z)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    /// <summary>
+    /// revisa si existe un obstaculo entre el enemigo y el jugador
+    /// </summary>
+    bool HasLineOfSight()
+    {
+        Vector3 direction = player.position - firePoint.position;
+        float distanceToPlayer = direction.magnitude;
+
+        if (Physics.Raycast(
+            firePoint.position,
+            direction.normalized,
+            distanceToPlayer,
+            lineOfSightBlockers,
+            QueryTriggerInteraction.Collide
+        ))
         {
             return false;
         }

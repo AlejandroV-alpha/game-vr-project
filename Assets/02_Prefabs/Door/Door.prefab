@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 12, y: 7.4, z: 7.4}
+  m_LocalScale: {x: 12, y: 7.4, z: 8}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4329866741109306826}
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 8804945834765117101}
   - component: {fileID: 7817063726153645177}
   - component: {fileID: 2749105433174465844}
-  - component: {fileID: 5218655926138374122}
+  - component: {fileID: 910733959591264390}
   m_Layer: 0
   m_Name: LeftDoor
   m_TagString: Untagged
@@ -182,7 +182,7 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5218655926138374122
+--- !u!65 &910733959591264390
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -201,8 +201,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+  m_Center: {x: -0.000000059604645, y: 0.000000029802322, z: 0}
 --- !u!1 &2769476972657350106
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,7 +283,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &6155903406341569251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -596,7 +596,7 @@ GameObject:
   - component: {fileID: 2708780205831200305}
   - component: {fileID: 3799055619934529640}
   - component: {fileID: 6701896824714050080}
-  - component: {fileID: 1552181964563966708}
+  - component: {fileID: 3433351949204396052}
   m_Layer: 0
   m_Name: 'RightDoor '
   m_TagString: Untagged
@@ -676,7 +676,7 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1552181964563966708
+--- !u!65 &3433351949204396052
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -695,5 +695,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+  m_Center: {x: 0.000000059604645, y: 0.000000029802322, z: 0}

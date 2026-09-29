@@ -8,6 +8,8 @@ public class RankingUI : MonoBehaviour
     [Tooltip("El Prefab de la fila (RankingRow). Debe ser un PREFAB del Project, no un objeto de la escena.")]
     public GameObject rowPrefab;
 
+    [Tooltip("Cuántas filas mostrar (0 = todas).")]
+    public int maxRows = 10;
 
     void OnEnable()
     {
@@ -17,14 +19,12 @@ public class RankingUI : MonoBehaviour
 
     void Start()
     {
-        // Segundo intento: si RankingManager aun no existia en OnEnable, aqui ya existe.
         Subscribe();
         Refresh();
     }
 
     public void Refresh()
     {
-        // Si falta algo, no hacemos nada (y no borramos lo que haya en Content).
         if (contentParent == null || rowPrefab == null)
         {
             Debug.LogWarning("RankingUI: falta asignar Content Parent o Row Prefab.");
@@ -36,13 +36,14 @@ public class RankingUI : MonoBehaviour
             Destroy(child.gameObject);
 
         var entries = RankingManager.Instance.data.entries;
-        for (int i = 0; i < Mathf.Min(entries.Count, 5); i++)
+        int count = maxRows > 0 ? Mathf.Min(entries.Count, maxRows) : entries.Count;
+
+        for (int i = 0; i < count; i++)
         {
             var row = Instantiate(rowPrefab, contentParent);
             row.GetComponent<RankingRowUIs>().SetData(i + 1, entries[i]);
         }
     }
-
 
     void OnDisable()
     {
@@ -53,7 +54,7 @@ public class RankingUI : MonoBehaviour
     void Subscribe()
     {
         if (RankingManager.Instance == null) return;
-        RankingManager.Instance.OnChanged -= Refresh; // evita duplicados
+        RankingManager.Instance.OnChanged -= Refresh;
         RankingManager.Instance.OnChanged += Refresh;
     }
 }

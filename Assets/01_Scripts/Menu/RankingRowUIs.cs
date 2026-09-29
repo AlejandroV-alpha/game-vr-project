@@ -25,8 +25,7 @@ public class RankingRowUIs : MonoBehaviour
 
     public void SetData(int position, RankingEntry entry)
     {
-        int min = (int)(entry.seconds / 60f);
-        float sec = entry.seconds % 60f;
-        rowText.text = $"#{position}  {min:00}:{sec:00.0}  {entry.dateTime}";
+        // Ejemplo: "#1  1034 pts  2025-11-28 13:52:36"
+        rowText.text = $"#{position}  {entry.points} pts  {entry.dateTime}";
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 public class EnemyData : ScriptableObject
 {
     [Header("Estadisticas")]
+    public int pointsOnDeath = 5;
     public int baseHealth;
     public int damage;
 

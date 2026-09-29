@@ -43,8 +43,9 @@ public class GameManagerMenu : MonoBehaviour
         if (!jugando) return;
 
         tiempo += Time.deltaTime;
-        if (tiempoText != null)
-            tiempoText.text = $"Tiempo: {tiempo:0.0}s";
+
+        if (tiempoText != null && ScoreManager.Instance != null)
+            tiempoText.text = $"Puntos: {ScoreManager.Instance.CurrentPoints}";
     }
 
     /// <summary>
@@ -56,18 +57,15 @@ public class GameManagerMenu : MonoBehaviour
         if (!jugando) return; // evita guardar dos veces
         jugando = false;
 
-        if (RankingManager.Instance != null)
-            RankingManager.Instance.AddScore(tiempo);
+        // ScoreManager calcula los puntos y llama a RankingManager.AddScore(puntos, segundos)
+        if (ScoreManager.Instance != null)
+            ScoreManager.Instance.EndRun();
 
         if (panelRanking != null)
         {
             var rankingUI = panelRanking.GetComponentInChildren<RankingUI>(true);
             if (rankingUI != null) rankingUI.Refresh();
         }
-
-        // --- Codigo anterior (ya no se usa) ---
-        // MostrarPanel(panelGameOver);
-        // SetBloqueo(true);
     }
 
     // ================== YA NO SE USA (comentado) ==================

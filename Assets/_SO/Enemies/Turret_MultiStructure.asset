@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f24a521829d83740816e950fbe39f18, type: 3}
   m_Name: Turret_MultiStructure
   m_EditorClassIdentifier: Assembly-CSharp::TurretData
+  pointsOnDeath: 10
   baseHealth: 1
   damage: 1
   firstShotDelay: 0.5

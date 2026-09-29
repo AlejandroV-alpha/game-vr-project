@@ -1,106 +1,80 @@
+using TMPro;
 using UnityEngine;
 
+// Va SOLO en GameScene (en un GameObject vacio "GameManager").
 public class GameManagerMenu : MonoBehaviour
 {
-    [Header("Menú")]
-    [Tooltip("El Canvas o GameObject raíz del menú completo (contiene los dos paneles de abajo).")]
-    [SerializeField] private GameObject menuUI;
+    [Header("Ranking (siempre visible en GameScene)")]
+    [Tooltip("Panel del ranking que tiene el script RankingUI.")]
     [SerializeField] private GameObject panelRanking;
 
-    [Header("Paneles del menú")]
-    [Tooltip("Panel con el botón 'Inicio' (se muestra la primera vez, al arrancar).")]
-    [SerializeField] private GameObject panelInicio;
-    [Tooltip("Panel con los botones 'Reiniciar' y 'Salir' (se muestra al morir).")]
-    [SerializeField] private GameObject panelGameOver;
+    [Tooltip("Opcional: texto que muestra cuantos segundos llevas sobreviviendo.")]
+    [SerializeField] private TMP_Text tiempoText;
 
-    [Header("Componentes a bloquear mientras el menú está activo")]
-    [Tooltip("Arrastrá acá los providers de movimiento del XR Origin: " +
-             "Move, Turn, Teleportation, Climb, Gravity, Jump, etc. " +
-             "También podés meter interactores (Near-Far, Poke) o scripts como el " +
-             "LevelGenerator si mueven el escenario hacia el jugador.")]
-    [SerializeField] private Behaviour[] componentesABloquear;
-    private GameObject panelAnterior;
+    // ================== YA NO SE USA (comentado) ==================
+    // [SerializeField] private GameObject menuUI;
+    // [SerializeField] private GameObject panelInicio;
+    // [SerializeField] private GameObject panelGameOver;
+    // [SerializeField] private Behaviour[] componentesABloquear;
+    // private GameObject panelAnterior;
+    // ==============================================================
+
+    private float tiempo;
+    private bool jugando;
 
     private void Awake()
     {
-        // Al arrancar la escena: se ve el panel de Inicio, movimiento bloqueado.
-        MostrarPanel(panelInicio);
-        SetBloqueo(true);
+        // Ya no se pausa el juego.
+        Time.timeScale = 1f;
+
+        // --- Codigo anterior (ya no se usa) ---
+        // MostrarPanel(panelInicio);
+        // SetBloqueo(true);
     }
 
-    /// <summary>
-    /// Enganchá este método en el OnClick() del botón "Inicio".
-    /// </summary>
-    public void StartGame()
+    private void Start()
     {
-        if (menuUI != null)
-            menuUI.SetActive(false);
+        tiempo = 0f;
+        jugando = true;
+    }
 
-        SetBloqueo(false);
+    private void Update()
+    {
+        if (!jugando) return;
+
+        tiempo += Time.deltaTime;
+        if (tiempoText != null)
+            tiempoText.text = $"Tiempo: {tiempo:0.0}s";
     }
 
     /// <summary>
     /// Llamalo desde PlayerHealth cuando el jugador muere:
-    /// muestra el panel de Game Over (Reiniciar / Salir) y bloquea el movimiento.
+    /// guarda los segundos en el JSON y refresca el ranking (que ya esta visible).
     /// </summary>
     public void ShowGameOverMenu()
     {
-        MostrarPanel(panelGameOver);
-        SetBloqueo(true);
-    }
+        if (!jugando) return; // evita guardar dos veces
+        jugando = false;
 
-    private void MostrarPanel(GameObject panelAMostrar)
-    {
-        if (menuUI != null)
-            menuUI.SetActive(true);
-
-        if (panelInicio != null)
-            panelInicio.SetActive(panelInicio == panelAMostrar);
-
-        if (panelGameOver != null)
-            panelGameOver.SetActive(panelGameOver == panelAMostrar);
+        if (RankingManager.Instance != null)
+            RankingManager.Instance.AddScore(tiempo);
 
         if (panelRanking != null)
-            panelRanking.SetActive(panelRanking == panelAMostrar);
-    }
-
-    private void SetBloqueo(bool bloqueado)
-    {
-        // Congela/descongela TODO lo que dependa del tiempo: movimiento del player,
-        // enemigos, animaciones, física, y cualquier coroutine con WaitForSeconds
-        // (como el LevelGenerator moviendo tiles). Así no hace falta listar cada
-        // script ni cada prefab de escenario.
-        Time.timeScale = bloqueado ? 0f : 1f;
-
-        // Además, apaga puntualmente los que quieras arrastrar acá (por ejemplo
-        // los interactores de la mano) para que ni siquiera se pueda intentar
-        // agarrar o disparar mientras el menú está arriba.
-        foreach (var comp in componentesABloquear)
         {
-            if (comp != null)
-                comp.enabled = !bloqueado;
+            var rankingUI = panelRanking.GetComponentInChildren<RankingUI>(true);
+            if (rankingUI != null) rankingUI.Refresh();
         }
+
+        // --- Codigo anterior (ya no se usa) ---
+        // MostrarPanel(panelGameOver);
+        // SetBloqueo(true);
     }
 
-    /// <summary>
-    /// Enganchá esto en el botón "Ver Ranking" (desde el panel de Inicio o GameOver).
-    /// </summary>
-    public void ShowRanking()
-    {
-        // Guarda cuál estaba activo antes de mostrar el ranking
-        if (panelInicio != null && panelInicio.activeSelf) panelAnterior = panelInicio;
-        else if (panelGameOver != null && panelGameOver.activeSelf) panelAnterior = panelGameOver;
-
-        MostrarPanel(panelRanking);
-        SetBloqueo(true);
-
-        var rankingUI = panelRanking.GetComponentInChildren<RankingUI>(true);
-        if (rankingUI != null)
-            rankingUI.Refresh();
-    }
-
-    public void CloseRanking()
-    {
-        MostrarPanel(panelAnterior != null ? panelAnterior : panelInicio);
-    }
+    // ================== YA NO SE USA (comentado) ==================
+    // public void StartGame() { ... }
+    // private void MostrarPanel(GameObject panelAMostrar) { ... }
+    // private void SetBloqueo(bool bloqueado) { ... }
+    // public void ShowRanking() { ... }
+    // public void CloseRanking() { ... }
+    // ==============================================================
 }

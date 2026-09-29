@@ -7,8 +7,8 @@ using UnityEngine;
 [Serializable]
 public class RankingEntry
 {
-    public string playerName;
-    public int score;
+    public float seconds;     // segundos transcurridos en la partida
+    public string dateTime;   // fecha y hora (la posicion NO se guarda: es el indice de la lista)
 }
 
 [Serializable]
@@ -21,8 +21,40 @@ public class RankingManager : MonoBehaviour
 {
     public static RankingManager Instance;
 
+    [Tooltip("Desactivado: gana quien dura MAS segundos (supervivencia). Activado: gana quien tarda MENOS.")]
+    [SerializeField] private bool menorTiempoEsMejor = false;
+
     private string path;
     public RankingData data = new RankingData();
+
+    public event Action OnChanged;
+
+    [ContextMenu("Guardar ahora")]
+    void GuardarAhora() { Save(); }
+
+    // ---- Herramientas de prueba: clic derecho en el titulo del componente (SOLO en Play) ----
+
+    [ContextMenu("Borrar ranking")]
+    void BorrarRanking()
+    {
+        data = new RankingData();
+        Save();
+        RefrescarPaneles();
+    }
+
+    [ContextMenu("Agregar registro de prueba")]
+    void AgregarPrueba()
+    {
+        AddScore(UnityEngine.Random.Range(10f, 120f)); // UnityEngine. porque "using System" tambien tiene Random
+        RefrescarPaneles();
+    }
+
+    void RefrescarPaneles()
+    {
+        foreach (var ui in FindObjectsByType<RankingUI>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+            ui.Refresh();
+    }
+    // ------------------------------------------------------------------------------------------
 
     void Awake()
     {
@@ -38,32 +70,54 @@ public class RankingManager : MonoBehaviour
         }
 
         path = Path.Combine(Application.persistentDataPath, "ranking.json");
+        Debug.Log("Ranking JSON en: " + path); // asi sabes donde esta el archivo
         Load();
     }
 
-    public void AddScore(string name, int score)
+    public void AddScore(float seconds)
     {
-        data.entries.Add(new RankingEntry { playerName = name, score = score });
-        data.entries = data.entries.OrderByDescending(e => e.score).Take(10).ToList();
+        data.entries.Add(new RankingEntry
+        {
+            seconds = seconds,
+            dateTime = DateTime.Now.ToString("dd/MM/yyyy HH:mm")
+        });
+
+        // El sort define el ranking: la posicion 1 es el indice 0 de la lista.
+        var ordenado = menorTiempoEsMejor
+            ? data.entries.OrderBy(e => e.seconds)
+            : data.entries.OrderByDescending(e => e.seconds);
+
+        data.entries = ordenado.Take(10).ToList();
         Save();
     }
 
     public void Save()
     {
-        string json = JsonUtility.ToJson(data, true);
-        File.WriteAllText(path, json);
+        try
+        {
+            File.WriteAllText(path, JsonUtility.ToJson(data, true));
+            Debug.Log($"Ranking guardado ({data.entries.Count} registros) en: {path}");
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("No se pudo guardar ranking.json: " + e);
+        }
+        OnChanged?.Invoke();
     }
 
     public void Load()
     {
-        if (File.Exists(path))
+        data = new RankingData();
+        if (!File.Exists(path)) return;
+
+        try
         {
-            string json = File.ReadAllText(path);
-            data = JsonUtility.FromJson<RankingData>(json);
+            var loaded = JsonUtility.FromJson<RankingData>(File.ReadAllText(path));
+            if (loaded != null && loaded.entries != null) data = loaded;
         }
-        else
+        catch (Exception e)
         {
-            data = new RankingData();
+            Debug.LogWarning("No se pudo leer ranking.json: " + e.Message);
         }
     }
 }

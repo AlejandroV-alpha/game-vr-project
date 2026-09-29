@@ -105,7 +105,7 @@ public class PlayerHealth : MonoBehaviour, ITakeDamage
 
         // Si el campo del Inspector esta vacio, lo busca en la escena
         if (gameStartManager == null)
-            gameStartManager = FindFirstObjectByType<GameManagerMenu>();
+            gameStartManager = FindAnyObjectByType<GameManagerMenu>();
 
         if (gameStartManager != null)
             gameStartManager.ShowGameOverMenu();

@@ -7,8 +7,9 @@ using UnityEngine;
 [Serializable]
 public class RankingEntry
 {
-    public string playerName;
-    public int score;
+    public int points;        // puntos obtenidos en la partida
+    public float seconds;     // tiempo que duró la partida (dato extra)
+    public string dateTime;   // fecha y hora
 }
 
 [Serializable]
@@ -21,8 +22,29 @@ public class RankingManager : MonoBehaviour
 {
     public static RankingManager Instance;
 
+    [Tooltip("Cuántos registros se guardan en total (0 = sin límite).")]
+    [SerializeField] private int maxEntries = 10;
+
     private string path;
     public RankingData data = new RankingData();
+
+    public event Action OnChanged;
+
+    [ContextMenu("Guardar ahora")]
+    void GuardarAhora() { Save(); }
+
+    [ContextMenu("Borrar ranking")]
+    void BorrarRanking()
+    {
+        data = new RankingData();
+        Save();
+    }
+
+    [ContextMenu("Agregar registro de prueba")]
+    void AgregarPrueba()
+    {
+        AddScore(UnityEngine.Random.Range(100, 2000), UnityEngine.Random.Range(10f, 120f));
+    }
 
     void Awake()
     {
@@ -38,32 +60,52 @@ public class RankingManager : MonoBehaviour
         }
 
         path = Path.Combine(Application.persistentDataPath, "ranking.json");
+        Debug.Log("Ranking JSON en: " + path);
         Load();
     }
 
-    public void AddScore(string name, int score)
+    public void AddScore(int points, float seconds = 0f)
     {
-        data.entries.Add(new RankingEntry { playerName = name, score = score });
-        data.entries = data.entries.OrderByDescending(e => e.score).Take(10).ToList();
+        data.entries.Add(new RankingEntry
+        {
+            points = points,
+            seconds = seconds,
+            dateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+        });
+
+        // Más puntos = mejor posición (la posición 1 es el índice 0)
+        var ordenado = data.entries.OrderByDescending(e => e.points);
+        data.entries = (maxEntries > 0 ? ordenado.Take(maxEntries) : ordenado).ToList();
+
         Save();
     }
 
     public void Save()
     {
-        string json = JsonUtility.ToJson(data, true);
-        File.WriteAllText(path, json);
+        try
+        {
+            File.WriteAllText(path, JsonUtility.ToJson(data, true));
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("No se pudo guardar ranking.json: " + e);
+        }
+        OnChanged?.Invoke();
     }
 
     public void Load()
     {
-        if (File.Exists(path))
+        data = new RankingData();
+        if (!File.Exists(path)) return;
+
+        try
         {
-            string json = File.ReadAllText(path);
-            data = JsonUtility.FromJson<RankingData>(json);
+            var loaded = JsonUtility.FromJson<RankingData>(File.ReadAllText(path));
+            if (loaded != null && loaded.entries != null) data = loaded;
         }
-        else
+        catch (Exception e)
         {
-            data = new RankingData();
+            Debug.LogWarning("No se pudo leer ranking.json: " + e.Message);
         }
     }
 }

@@ -48,6 +48,16 @@ public class EnemyHealth : MonoBehaviour, ITakeDamage
     /// </summary>
     void Die()
     {
+        if (ScoreManager.Instance != null)
+        {
+            ScoreManager.Instance.AddPoints(enemyData.pointsOnDeath);
+            Debug.Log($"[Puntos] Enemigo murió: +{enemyData.pointsOnDeath} pts | Total: {ScoreManager.Instance.CurrentPoints}");
+        }
+        else
+        {
+            Debug.LogWarning("[Puntos] ScoreManager.Instance es null: no se sumaron puntos. ¿Está en GameScene?");
+        }
+
         if (enemyExplosionPrefab != null)
         {
             Instantiate(enemyExplosionPrefab, transform.position, Quaternion.identity);

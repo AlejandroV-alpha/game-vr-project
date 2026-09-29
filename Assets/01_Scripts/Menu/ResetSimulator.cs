@@ -5,7 +5,7 @@ public class ResetSimulator : MonoBehaviour
 {
     void Start()
     {
-        var sim = FindFirstObjectByType<XRInteractionSimulator>();
+        var sim = FindAnyObjectByType<XRInteractionSimulator>();
         if (sim != null)
         {
             sim.enabled = false;
